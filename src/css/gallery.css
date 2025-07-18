@@ -9,9 +9,9 @@
 .gallery-item {
   width: calc((100% - 54px) / 3);
   min-width: 360px;
-  border: 1px solid #808080;
-  border-radius: 8px;
   overflow: hidden;
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
 }
 
 .gallery-image {
@@ -26,6 +26,11 @@
   align-items: center;
   gap: 24px;
   padding: 4px 20px;
+  border-bottom: 1px solid #808080;
+  border-left: 1px solid #808080;
+  border-right: 1px solid #808080;
+  border-bottom-left-radius: 8px;
+  border-bottom-right-radius: 8px;
 }
 
 .image-stats-title {
