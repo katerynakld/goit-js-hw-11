@@ -44,5 +44,14 @@ export default defineConfig(({ command }) => {
         sort: 'mobile-first',
       }),
     ],
+    // server: {
+    //   proxy: {
+    //     '/api': {
+    //       target: 'https://pixabay.com',
+    //       changeOrigin: true,
+    //       rewrite: path => path.replace(/^\/api/, '/api'),
+    //     },
+    //   },
+    // },
   };
 });
