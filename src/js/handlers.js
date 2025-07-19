@@ -1,5 +1,10 @@
 import { getImageByQuery } from './pixabay-api';
-import { clearGallery, hideLoader, showLoader } from './render-functions';
+import {
+  createGallery,
+  clearGallery,
+  hideLoader,
+  showLoader,
+} from './render-functions';
 import iziToast from 'izitoast';
 import 'izitoast/dist/css/iziToast.min.css';
 import iconError from '../public/error-icon.svg';
@@ -23,5 +28,23 @@ export function onFormSubmit(event) {
     return;
   }
 
-  getImageByQuery(userInput);
+  getImageByQuery(userInput)
+    .then(hits => {
+      if (!hits || hits.length === 0) {
+        throw new Error('No images found');
+      }
+      showLoader();
+      createGallery(hits);
+    })
+    .catch(error => {
+      hideLoader();
+      iziToast.error({
+        message: `Houston, we have a problem.`,
+        position: 'topRight',
+        backgroundColor: '#ef4040',
+        messageColor: '#ffffff',
+        iconUrl: iconError,
+        iconColor: '#ffffff',
+      });
+    });
 }

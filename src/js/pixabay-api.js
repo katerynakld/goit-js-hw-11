@@ -8,7 +8,7 @@ axios.defaults.baseURL = `https://pixabay.com`;
 
 export function getImageByQuery(query) {
   const formattedQuery = query.split(' ').join('+');
-  axios
+  return axios
     .get('/api/', {
       params: {
         key: apiKey,
@@ -21,23 +21,5 @@ export function getImageByQuery(query) {
     .then(res => {
       return res.data.hits;
     })
-    .then(hits => {
-      if (!hits || hits.length === 0) {
-        throw new Error('No images found');
-      }
-
-      createGallery(hits);
-    })
-    .catch(error => {
-      hideLoader();
-      iziToast.error({
-        message:
-          'Sorry, there are no images matching your search query. Please try again!',
-        position: 'topRight',
-        backgroundColor: '#ef4040',
-        messageColor: '#ffffff',
-        iconUrl: iconError,
-        iconColor: '#ffffff',
-      });
-    });
+    .catch(error => console.log(error));
 }
