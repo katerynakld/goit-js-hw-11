@@ -2,14 +2,12 @@ import { refs } from './refs';
 import SimpleLightbox from 'simplelightbox';
 import 'simplelightbox/dist/simple-lightbox.min.css';
 
-let gallery = [];
+let gallery = '';
 let galleryLightBox;
 
 export function createGallery(images) {
   for (const image of images) {
-    const galleryItem = document.createElement('li');
-    galleryItem.classList.add('gallery-item');
-    galleryItem.innerHTML = `<a href="${image.largeImageURL}" class="gallery-link">
+    gallery += `<li class="gallery-item"><a href="${image.largeImageURL}" class="gallery-link">
             <img
               src="${image.webformatURL}"
               alt="${image.tags}"
@@ -34,13 +32,12 @@ export function createGallery(images) {
               <p class="image-stats-title">Downloads</p>
               <p class="image-stats">${image.downloads}</p>
             </li>
-          </ul>`;
-
-    gallery.push(galleryItem);
+          </ul>
+          </li>`;
   }
 
   hideLoader();
-  refs.galleryEl.append(...gallery);
+  refs.galleryEl.insertAdjacentHTML('beforeend', gallery);
 
   if (!galleryLightBox) {
     galleryLightBox = new SimpleLightbox('.gallery a', {
